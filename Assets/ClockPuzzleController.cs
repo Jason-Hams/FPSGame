@@ -15,14 +15,16 @@ public class ClockPuzzleController : PuzzlePiece
 
         }
 
+        Debug.Log("randomizing sequence");
         List<int> randomsequence = new List<int>();
         for (int index = 0; index < ClockInputs.Count; index++)
         {
             int i = sequence[Random.Range(0, sequence.Count)];
             sequence.Remove(i);
             randomsequence.Add(i);
-            Debug.Log(i);
-             
+            Debug.Log(index / ClockInputs.Count);
+            ClockInputs[i].SetClockHands((float)index / ClockInputs.Count);
+            
         }
 
         return randomsequence;
@@ -36,7 +38,9 @@ public class ClockPuzzleController : PuzzlePiece
             if (RandomSequence.Count <= 0)
             {
                 UnlockPuzzle();
+                Debug.Log("puzzle is unlocked");
             }
+
         } 
         else
         {
@@ -57,12 +61,21 @@ public class ClockPuzzleController : PuzzlePiece
             ClockInputs[index].LinkToController(this, index);
         }
 
-        randomizedSequence();
+        RandomSequence= randomizedSequence();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    protected override void UnlockPuzzle()
+    {
+        base.UnlockPuzzle();
+        foreach (ClockInput item in ClockInputs)
+        {
+            item.DisablePlayerInput();
+        }
     }
 }

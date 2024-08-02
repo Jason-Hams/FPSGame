@@ -7,7 +7,7 @@ public abstract class PuzzlePiece : MonoBehaviour
 {
     public UnityEvent onUnlock;
 
-    protected void UnlockPuzzle()
+    protected virtual void UnlockPuzzle()
     {
         onUnlock.Invoke();
     }
