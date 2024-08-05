@@ -92,7 +92,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2720298901595936143}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -210,6 +210,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 0
   ClockPivot: {fileID: 5932931379016310643}
+  Meshrender: {fileID: 4560147389148260472}
+  HitMaterial: {fileID: 2100000, guid: 5ccffb21468d24558bab0ed5090e7160, type: 2}
 --- !u!1 &4784081314554249968
 GameObject:
   m_ObjectHideFlags: 0

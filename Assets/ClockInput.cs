@@ -8,7 +8,11 @@ public class ClockInput : MonoBehaviour
     ClockPuzzleController Controller;
     [SerializeField] Transform ClockPivot;
     bool AllowPlayerInput = true;
+    [SerializeField] Renderer Meshrender;
+    [SerializeField] Material HitMaterial;
+    Material originalMaterial;
 
+ 
     public void LinkToController(ClockPuzzleController Controller, int value)
     {
         this.value = value;
@@ -18,7 +22,8 @@ public class ClockInput : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        originalMaterial = Meshrender.material;
+
     }
 
     // Update is called once per frame
@@ -30,15 +35,18 @@ public class ClockInput : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!AllowPlayerInput) return;
+        Meshrender.material = HitMaterial;
         Controller.onPlayerInput(value);
         Debug.Log(value);
+       
     }
 
     public void SetClockHands(float Percent)
 
     {
         Quaternion NewRotation = Quaternion.Euler(0, 0, Percent * -360f);
-        ClockPivot.rotation = NewRotation;
+        ClockPivot.localRotation = NewRotation;
+        Meshrender.material = originalMaterial;
     }
 
     public void DisablePlayerInput()
