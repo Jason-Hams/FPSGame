@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretAttackState : TurretState
-{ 
-    public TurretAttackState(TurretController contr) : base(contr)
+{
+    HealthModule Health;
+
+    public TurretAttackState(TurretController contr, HealthModule Health) : base(contr)
     {
+        this.Health = Health;
     }
 
     public override void OnStateEnter()
@@ -20,7 +23,7 @@ public class TurretAttackState : TurretState
 
     public override void OnStateRun()
     {
-        
+        Health.DeductHealth(controller.dmgPerSec* Time.deltaTime);
     }
 }
 

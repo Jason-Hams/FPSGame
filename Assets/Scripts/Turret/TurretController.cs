@@ -4,33 +4,30 @@ using UnityEngine;
 
 public class TurretController : MonoBehaviour
 {
+    public TurretState currentState { get; private set; }
+    public TurretVision turretVision { get; private set; }
+    [field: SerializeField] public float dmgPerSec { get; private set; } = 10f;
 
-    public TurretState currentState;
-    // Start is called before the first frame update
     void Start()
     {
-        ChangeState(new TurretIdleState(this));
+        currentState = new TurretIdleState(this);
+        currentState.OnStateEnter();
     }
-
-    // Update is called once per frame
     void Update()
     {
-
         currentState.OnStateRun();
-
     }
-
     public void ChangeState(TurretState state)
     {
         if (currentState != null)
         {
             currentState.OnStateExit();
         }
-
         currentState = state;
         currentState.OnStateEnter();
     }
-
-    
-
+    public void LinkToTurretVision(TurretVision turretVision)
+    {
+        this.turretVision = turretVision;
+    }
 }
