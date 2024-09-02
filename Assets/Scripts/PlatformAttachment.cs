@@ -4,24 +4,22 @@ using UnityEngine;
 
 public class PlatformAttachment : MonoBehaviour
 {
-    private Rigidbody rb;
-
-    CharacterController cc;
-
-    private void Start()
+    void OnTriggerEnter(Collider other)
     {
-        rb = GetComponent<Rigidbody>();
+        Debug.Log("player has entered");
+        if (other.CompareTag("Player"))
+        {
+            other.transform.SetParent(transform);
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
-            cc = other.GetComponent<CharacterController>();
+        if (other.CompareTag("Player"))
+        {
+            other.transform.SetParent(null);
+        }
     }
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Player")
-            cc.Move(rb.velocity * Time.deltaTime);
-    }
+
 }
 
