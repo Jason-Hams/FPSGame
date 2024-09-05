@@ -10,7 +10,7 @@ public class CutsceneManger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Singleton.OnActionLevelStart += StartCutscene;
+        //GameManager.Singleton.OnActionLevelStart += StartCutscene;  
 
         
     }
@@ -26,6 +26,6 @@ public class CutsceneManger : MonoBehaviour
     {
         
         GameManager.Singleton.UnlockPlayerInput();
-        GameManager.Singleton.OnActionLevelStart -= StartCutscene;
+       // GameManager.Singleton.OnActionLevelStart -= StartCutscene;
     }
 }

@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
 
     private InputController player;
 
-    public Action OnActionLevelStart;
-    public Action OnActionLevelEnds;
+    public UnityEvent OnActionLevelStart;
+    public UnityEvent OnActionLevelEnds;
 
     private void Awake()
     {

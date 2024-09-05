@@ -22,11 +22,16 @@ public class HealthModule : MonoBehaviour
     public void DeductHealth(float toDeduct)
     {
         currentHealth -= toDeduct;
-        onHealthChanged.Invoke(currentHealth);
+        onHealthChanged?.Invoke(currentHealth);
 
         if (currentHealth <= 0)
         {
-            OnDie.Invoke();
+        Debug.Log("player died");
+        GetComponent<CharacterController>().enabled = false;
+            transform.position = Respawn.Singleton.GetRespawn().position;
+            GetComponent<CharacterController>().enabled = true;
+            currentHealth = maxHealth;
+            OnDie?.Invoke();
         }
     }
 }
