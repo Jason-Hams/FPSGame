@@ -48,9 +48,7 @@ public class JumpModule : MonoBehaviour
         ApplyGravity();
         if (transform.position.y < -2.6f)
         {
-            GetComponent<CharacterController>().enabled = false;
-            transform.position = Respawn.Singleton.GetRespawn().position;
-            GetComponent<CharacterController>().enabled = true;
+            GameManager.Singleton.PlayerDie();
         }
     }
 }

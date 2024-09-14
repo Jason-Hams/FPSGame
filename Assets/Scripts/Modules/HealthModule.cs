@@ -26,10 +26,7 @@ public class HealthModule : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-        Debug.Log("player died");
-        GetComponent<CharacterController>().enabled = false;
-            transform.position = Respawn.Singleton.GetRespawn().position;
-            GetComponent<CharacterController>().enabled = true;
+            GameManager.Singleton.PlayerDie();
             currentHealth = maxHealth;
             OnDie?.Invoke();
         }

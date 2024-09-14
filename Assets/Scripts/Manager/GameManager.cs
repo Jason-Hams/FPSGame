@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -12,18 +14,12 @@ public class GameManager : MonoBehaviour
 
     public UnityEvent OnActionLevelStart;
     public UnityEvent OnActionLevelEnds;
+    public UnityEvent OnPlayerDied; 
 
     private void Awake()
-    {
-        if (Singleton == null)
         {
-            Singleton = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        
+        Singleton=this;
 
         
     }
@@ -50,8 +46,27 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDie()
     {
-        Debug.Log("Player Died");
+        
+        OnPlayerDied.Invoke(); 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0;
+
     }
+
+    
+
+
+    public void PlayerRespawn()
+    {
+        Time.timeScale = 1;
+        player.GetComponent<CharacterController>().enabled = false;
+        player.transform.position = Respawn.Singleton.GetRespawn().position;
+        player.GetComponent<CharacterController>().enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
 
     public void LockPlayerInput()
     {
